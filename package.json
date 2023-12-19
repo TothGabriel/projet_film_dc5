@@ -2,7 +2,7 @@
   "name": "projet_film_dc5",
   "version": "1.0.0",
   "description": "Projet de catalogue de films | YOHANN DC5",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "test"
   },
