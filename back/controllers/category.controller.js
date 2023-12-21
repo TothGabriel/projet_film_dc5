@@ -1,8 +1,6 @@
-const express = require('express');
-const router = express.Router();
-const dotenv = require('dotenv').config();
+const categoryModel = require('../models/category.model');
 
-router.get('/categories', async (req, res) => {
+module.exports.getCategories = async (req, res) => {
     const apiKey = process.env.API_KEY;
     console.log(apiKey);
     
@@ -12,6 +10,4 @@ router.get('/categories', async (req, res) => {
     const genres = await response.json();
   
     res.json(genres);
-});
-
-module.exports = router;
+};

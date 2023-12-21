@@ -4,26 +4,26 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const app = express();
 
-const routes = require('./routes/routes.js');
-
 const port = process.env.BACK_PORT || 3001;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Utilisez le routeur importé
-app.use('/api', routes); // Toutes les routes dans routes.js seront préfixées par '/api'
-
+// routes de test au '/'
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Route par défaut');
 });
 
-// middleware
+// middleware de test
 app.use((req, res, next) => {
     console.log('Route reçue');
     next();
 });
 
+// Prefixe des routes categories
+app.use('/api/categories', require('./routes/api/category.route'));
+
+// Ecoute du port 3001
 app.listen(port, () => {
     console.log(`App démarrée sur le port ${port}`);
 });
