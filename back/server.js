@@ -17,7 +17,7 @@ app.listen(port, () => {
     console.log(`App démarrée sur le port ${port}`)
 });
 
-// middleware si la route de base fonctionne
+// middleware si la route 
 app.use((req, res, next) => {
     console.log('Route reçue');
     next();
