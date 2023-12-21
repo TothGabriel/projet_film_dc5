@@ -1,6 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const User = require('../models/user.model');
+const authenticate = require('../middleware/authenticate'); 
 
 const router = express.Router();
 
@@ -39,12 +40,9 @@ router.post('/logout', (req, res) => {
   res.json({ message: 'Logout successful' });
 });
 
-
 // Exemple de route protégée avec le middleware d'authentification
 router.get('/protected', authenticate, (req, res) => {
     res.json({ message: 'This is a protected route', user: req.user });
-  });
+});
 
-
-  
 module.exports = router;
