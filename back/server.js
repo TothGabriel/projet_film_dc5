@@ -1,7 +1,8 @@
 const express = require('express')
+const dotenv = require('dotenv');
 const app = express()
 
-const port = 3001; 
+const port = process.env.BACK_PORT; 
 
 app.set('port', port);
 
