@@ -1,10 +1,11 @@
 const User = require('../../models/users/models.users');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 exports.login = async (req, res) => {
     try {
-      const { email, password } = req.body;
-      const user = await User.findOne({ where: { email } });
+      const { username, password } = req.body;
+      const user = await User.findOne({ username });
   
       if (!user) {
         return res.status(401).json({ message: "Utilisateur non trouvé" });
@@ -16,7 +17,7 @@ exports.login = async (req, res) => {
         return res.status(401).json({ message: "Mot de passe incorrect" });
       }
   
-      const token = jwt.sign({ userId: user.id }, 'S7CHZTOAHX5YiYZsmbMjClgjNICu5f2Z', { expiresIn: '1d' });
+      const token = jwt.sign({ userId: user.id }, 'S7CHZTOAHX5YiYZsmbMjClgjNICu5f2Z', { expiresIn: '360d' });
   
       res.json({ token });
     } catch (error) {
@@ -26,7 +27,7 @@ exports.login = async (req, res) => {
   
 exports.register = async (req, res) => {
     try {
-        const { nom, email, password } = req.body;
+        const { username, email, password } = req.body;
     
         console.log(req.body);
     
@@ -36,7 +37,7 @@ exports.register = async (req, res) => {
     
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = await User.create({
-        nom,
+        username,
         email,
         password: hashedPassword,
     

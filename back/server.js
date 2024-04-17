@@ -1,10 +1,10 @@
 const express = require('express');
-const Database = require('./database/database');
+const database = require('./database/database');
 require('dotenv').config();
 
 const app = express();
 const prefixV1 = '/api/v1';
-Database();
+database();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
