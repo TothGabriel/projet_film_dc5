@@ -16,12 +16,14 @@ app.listen(PORT, () => {
 
 /* Déclaration des routes */
 const usersRoutes = require('./routes/users/routes.users');
+const tmdbRoutes = require('./routes/tmdb/routes.tmdb');
 
 /* Middleware */
 const authMiddleware = require('./middlewares/middlewares.auth');
 
 /* Appelation des routes */
 app.use(`${prefixV1}/users`, usersRoutes);
+app.use(`${prefixV1}/tmdb`, tmdbRoutes);
 
 // Middleware d'authentification
 app.use(authMiddleware);
