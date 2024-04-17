@@ -1,5 +1,6 @@
 const express = require('express');
 const Database = require('./database/database');
+require('dotenv').config();
 
 const app = express();
 const prefixV1 = '/api/v1';
@@ -8,7 +9,7 @@ Database();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-const PORT = 3001;
+const PORT = process.env.BACKEND_PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Le serveur tourne sur le port : ${PORT}`);
 });
