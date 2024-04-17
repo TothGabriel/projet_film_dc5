@@ -1,4 +1,4 @@
-const users = require('./controllers.users');
+const users = require('../../models/users/models.users');
 
 exports.login = async (req, res) => {
     try {

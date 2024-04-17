@@ -1,15 +1,9 @@
 const express = require('express');
-const dotenv = require('dotenv').config();
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const connectDB = require('./db');
+const connectDB = require('./database');
 
 const app = express();
+const prefixV1 = '/api/v1';
 connectDB();
-
-/* Middleware */
-const authMiddleware = require('./middlewares/middlewares.auth');
-
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -19,7 +13,14 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
+/* Déclaration des routes */
+const usersRoutes = require('./routes/users/routes.users');
+
+/* Middleware */
+const authMiddleware = require('./middlewares/middlewares.auth');
+
+/* Appelation des routes */
+app.use(`${prefixV1}/users`, usersRoutes);
+
 // Middleware d'authentification
 app.use(authMiddleware);
-
-/* Déclaration des routes */
