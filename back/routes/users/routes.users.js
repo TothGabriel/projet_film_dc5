@@ -4,6 +4,6 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/login', users.login);
-router.post('/register', authMiddleware, users.register);
+router.post('/register', users.register);
 
 module.exports = router;
